@@ -1,6 +1,6 @@
-# demo_app
+# BMI App
 
-A new Flutter project.
+A new Flutter project for calculate your BMI
 
 ## Getting Started
 
