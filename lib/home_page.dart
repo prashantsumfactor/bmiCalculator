@@ -15,29 +15,11 @@ class BmiHome extends StatefulWidget {
   State<BmiHome> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<BmiHome> {
-  Color maleCardColor = inActiveCardColor;
-  Color feMaleCardColor = inActiveCardColor;
+enum Gender { male, female }
 
-  // 1- male, 2- female
-  void updateColor(int gender) {
-    if (gender == 1) {
-      if (maleCardColor == inActiveCardColor) {
-        maleCardColor = activeCardColor;
-        feMaleCardColor = inActiveCardColor;
-      } else {
-        maleCardColor = inActiveCardColor;
-      }
-    }
-    if (gender == 2) {
-      if (feMaleCardColor == inActiveCardColor) {
-        feMaleCardColor = activeCardColor;
-        maleCardColor = inActiveCardColor;
-      } else {
-        feMaleCardColor = inActiveCardColor;
-      }
-    }
-  }
+class _MyHomePageState extends State<BmiHome> {
+
+  Gender selectedGender = Gender.male;
 
   @override
   Widget build(BuildContext context) {
@@ -53,40 +35,37 @@ class _MyHomePageState extends State<BmiHome> {
               child: Row(
             children: [
               Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      updateColor(1);
-                    });
-                  },
-                  child: ReusableCard(
-                      color: maleCardColor,
-                      child: IconContent(
-                        name: 'MALE',
-                        icon: FontAwesomeIcons.mars,
-                      )),
-                ),
+                child: ReusableCard(
+                    onPress: (){
+                      selectedGender = Gender.male;
+                    },
+                    color: selectedGender == Gender.male
+                        ? activeCardColor
+                        : inActiveCardColor,
+                    child: IconContent(
+                      name: 'MALE',
+                      icon: FontAwesomeIcons.mars,
+                    )),
               ),
               Expanded(
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      updateColor(2);
-                    });
-                  },
-                  child: ReusableCard(
-                      color: feMaleCardColor,
-                      child: IconContent(
-                        name: 'FEMALE',
-                        icon: FontAwesomeIcons.venus,
-                      )),
-                ),
+                child: ReusableCard(
+                    onPress: (){
+                      selectedGender = Gender.female;
+                    },
+                    color: selectedGender == Gender.female
+                        ? activeCardColor
+                        : inActiveCardColor,
+                    child: IconContent(
+                      name: 'FEMALE',
+                      icon: FontAwesomeIcons.venus,
+                    )),
               )
             ],
           )),
           Expanded(
               child: ReusableCard(
             color: activeCardColor,
+            onPress: (){},
             child: IconContent(
               name: 'MALE',
               icon: FontAwesomeIcons.mars,
@@ -98,6 +77,7 @@ class _MyHomePageState extends State<BmiHome> {
               Expanded(
                   child: ReusableCard(
                       color: activeCardColor,
+                      onPress: (){},
                       child: IconContent(
                         name: 'MALE',
                         icon: FontAwesomeIcons.mars,
@@ -105,6 +85,7 @@ class _MyHomePageState extends State<BmiHome> {
               Expanded(
                 child: ReusableCard(
                     color: activeCardColor,
+                    onPress: (){},
                     child: IconContent(
                       name: 'FEMALE',
                       icon: FontAwesomeIcons.mars,
