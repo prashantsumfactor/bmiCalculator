@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'icon_content.dart';
-import 'reusable_card.dart';
-import 'constant.dart';
+import '../component/icon_content.dart';
+import '../component/reusable_card.dart';
+import '../constant.dart';
 import 'result_page.dart';
+import '../component/bottom_button.dart';
+import '../component/roundIcon_button.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -208,46 +210,13 @@ class _MyHomePageState extends State<InputPage> {
               )
             ],
           )),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const ResultPage()));
-            },
-            child: Container(
-              color: kBottomColor,
-              width: double.infinity,
-              height: kBottomContainerHeight,
-              margin: const EdgeInsets.only(top: 10.0),
-              child: const Text(
-                'CALCULATE',
-                style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.w900),
-              ),
-            ),
-          ),
+          BottomButton(buttonTitle: 'CALCULATE',onTap: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const ResultPage()));
+          },),
         ],
       ),
     );
   }
 }
 
-class RoundIconButton extends StatelessWidget {
-  RoundIconButton({required this.icon, required this.onPressed});
 
-  final IconData icon;
-  final GestureTapCallback onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      onPressed: onPressed,
-      elevation: 0.0,
-      child: Icon(icon),
-      constraints: BoxConstraints.tightFor(
-        width: 56.0,
-        height: 56.0,
-      ),
-      shape: CircleBorder(),
-      fillColor: Color(0xFF4C4F5E),
-    );
-  }
-}
