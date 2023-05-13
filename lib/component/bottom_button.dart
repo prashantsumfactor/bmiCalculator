@@ -3,7 +3,7 @@ import '../constant.dart';
 
 class BottomButton extends StatelessWidget {
 
-  BottomButton({required this.buttonTitle, required this.onTap});
+  const BottomButton({super.key, required this.buttonTitle, required this.onTap});
 
   final String buttonTitle;
   final GestureTapCallback onTap;

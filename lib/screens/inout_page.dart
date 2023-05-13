@@ -6,6 +6,7 @@ import '../constant.dart';
 import 'result_page.dart';
 import '../component/bottom_button.dart';
 import '../component/roundIcon_button.dart';
+import 'calculate_brain.dart';
 
 class InputPage extends StatefulWidget {
   const InputPage({super.key});
@@ -100,9 +101,9 @@ class _MyHomePageState extends State<InputPage> {
                         inactiveTrackColor: kInActiveSliderColor,
                         overlayColor: kSliderThumbOverlayColor,
                         thumbShape:
-                            RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                            const RoundSliderThumbShape(enabledThumbRadius: 15.0),
                         overlayShape:
-                            RoundSliderOverlayShape(overlayRadius: 30.0),
+                            const RoundSliderOverlayShape(overlayRadius: 30.0),
                         thumbColor: kSliderThumbColor,
                       ),
                       child: Slider(
@@ -211,7 +212,12 @@ class _MyHomePageState extends State<InputPage> {
             ],
           )),
           BottomButton(buttonTitle: 'CALCULATE',onTap: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const ResultPage()));
+            CalculatorBrain calBrain = CalculatorBrain(height: height, weight: weight);
+            Navigator.push(context, MaterialPageRoute(builder: (context) => ResultPage(
+              bmiResult: calBrain.calculateBMI(),
+              resultText: calBrain.getResult(),
+              interpretation: calBrain.getInterpretation(),
+            )));
           },),
         ],
       ),
